@@ -12,6 +12,25 @@
         <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
         <td><%= user.name %></td>
         <td><%= link_to 'Show', user %></td>
+        <td>フォロー数：<%= user.following.count %></td>
+        <td>フォロワー数：<%= user.followers.count %></td>
+        <td>
+          <!--ログイン中のユーザーと任意のユーザーが違う場合-->
+          <% if current_user != user %>
+            <!--ログインユーザーのリレーションから{}内の条件を満たすものを持ってくる-->
+            <% relationship = @relationships.find { |r| r.follower_id == current_user.id && r.followed_id == user.id } %>
+            <!--上記のリレーションが存在する場合-->
+            <% if relationship %>
+              <%= link_to user_relationship_path(user_id: user.id, id: relationship.id),  method: :delete do %>
+                <div>フォロー外す</div>
+              <% end %>
+            <% else %>
+              <%= link_to user_relationships_path(user_id: user.id), method: :post do %>
+                <div>フォローする</div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

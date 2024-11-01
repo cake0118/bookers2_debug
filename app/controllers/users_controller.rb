@@ -9,6 +9,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    # ログインユーザーに紐付いているフォロワーを持ってくる
+    @relationships = current_user.active_relationships
     @book = Book.new
   end
 
