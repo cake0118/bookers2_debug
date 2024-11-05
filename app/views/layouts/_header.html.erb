@@ -54,15 +54,17 @@
       </div>
     </div>
   </nav>
-  <div class="container mx-auto text-center">
-   <%= form_with url: search_index_path, method: :get, local: true do %>
-      # 検索ワードが空欄なら検索ワードの文字列を表示する
-      <%= text_field_tag :query, nil, placeholder: '検索ワード' %>
-      # [表示する文字列,controllerで定義したもの]を示している
-      <%= select_tag :model, options_for_select([['User', 'User'], ['Book', 'Book']]), prompt: 'モデルを選択' %>
-      <%= select_tag :search_method, options_for_select([['完全一致', '完全一致'], ['前方一致', '前方一致'], ['後方一致', '後方一致'], ['部分一致', '部分一致']]), prompt: '検索方法' %>
-      <%= submit_tag '検索' %>
-   <% end %>
-  </div>
+  <% if user_signed_in? %>
+    <div class="container mx-auto text-center">
+     <%= form_with url: searches_path, method: :get, local: true do %>
+        <%# 検索ワードが空欄なら検索ワードの文字列を表示する %>
+        <%= text_field_tag :query, nil, placeholder: '検索ワード' %>
+        <%# [表示する文字列,controllerで定義したもの]を示している %>
+        <%= select_tag :model, options_for_select([['User', 'User'], ['Book', 'Book']]), prompt: 'モデルを選択' %>
+        <%= select_tag :search_method, options_for_select([['完全一致', '完全一致'], ['前方一致', '前方一致'], ['後方一致', '後方一致'], ['部分一致', '部分一致']]), prompt: '検索方法' %>
+        <%= submit_tag '検索' %>
+     <% end %>
+    </div>
+  <% end %>
 </div>
 </header>

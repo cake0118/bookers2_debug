@@ -1,6 +1,6 @@
 <% if @results.present? %>
   <%# Userで検索された場合 %>
-  <% if @model == User %>
+  <% if @model == 'User' %>
   <h1>User search for "<%= @query %>"</h1>
   <table class="table">
     <thead>
@@ -22,7 +22,7 @@
   </table>
 
   <%# Bookで検索された場合 %>
-  <% elsif @model == Book %>
+  <% elsif @model == 'Book' %>
   <h1>Book search for "<%= @query %>"</h1>
   <table class="table">
     <thead>

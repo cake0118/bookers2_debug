@@ -1,5 +1,4 @@
-class SeachesController < ApplicationController
-
+class SearchesController < ApplicationController
   def search
     # どのモデルから検索するか？
     @model = params[:model]
@@ -22,12 +21,11 @@ class SeachesController < ApplicationController
                 # Userモデルから一致するものを持ってくる
                 User.search(@search_method, @query)
                elsif @model == 'Book'
-                Bookモデルから一致するものを持ってくる
+                # Bookモデルから一致するものを持ってくる
                 Book.search(@search_method, @query)
                else
                 # 選択されたモデルが空なら空を返す
                 []
                end
   end
-
 end
