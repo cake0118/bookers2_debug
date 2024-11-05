@@ -33,6 +33,24 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  # ユーザー自身で検索してもらうため
+  def self.search(search_method, query)
+    case search_method
+    # #{query}の場所が検索した文字列がどこにあるかを定義している
+    # %はそこに何かしらの文字列が入る可能性を表している
+    when '完全一致'
+      where(name: query)
+    when '前方一致'
+      where('name LIKE ?', "#{query}%")
+    when '後方一致'
+      where('name LIKE ?', "%#{query}")
+    when '部分一致'
+      where('name LIKE ?', "%#{query}%")
+    else
+      all
+    end
+  end
+
 
   has_one_attached :profile_image
 

@@ -3,7 +3,7 @@ class CreateRelationships < ActiveRecord::Migration[6.1]
     create_table :relationships do |t|
       
       # 下２行は外部キーを作成し、Usersテーブルのidのみを参照するよう固定している
-      # 自身がフォローしている人
+      # フォローしている人
       t.references :follower, foreign_key: { to_table: :users }
       # 自身をフォローしている人
       t.references :followed, foreign_key: { to_table: :users }
