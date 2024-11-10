@@ -1,0 +1,2 @@
+// create.js.erb
+$("#favorite-<%= @book.id %>").html("<%= j(render partial: 'books/favorite', locals: { book: @book }) %>");
