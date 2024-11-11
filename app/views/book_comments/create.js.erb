@@ -1,0 +1,5 @@
+# グループチャットのように全ユーザーの投稿をリアルタイムで更新する場合
+# $("#comments-section").html("<%= escape_javascript(render 'comments', book: @book) %>");
+# 自身の追加投稿のみをはっきりとわかるようにする場合
+$("#comments").append("<%= j render partial: 'book_comments/comment', locals: { book_comment: @book_comment } %>");
+$("#new_book_comment")[0].reset(); 
